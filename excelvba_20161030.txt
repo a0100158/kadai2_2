@@ -1,0 +1,223 @@
+Option Explicit
+
+Private Sub houkokuBTN_Click()
+
+    Dim strSagyobiYear As String  '作業日の年
+    Dim strSagyobiMonth As String  '作業日の月
+    Dim strSakuseiSheetName As String    '作成するシート名
+    Dim i As Integer
+    Dim intSheetCnt As Integer 'シートの数
+    Dim strShutokuSheetName As String '取得するシート名
+    Dim b As Boolean
+    
+
+    strSagyobiYear = Year(Range("B6").Value)
+    strSagyobiMonth = Right("0" & Month(Range("B6").Value), 2)
+    strSakuseiSheetName = strSagyobiYear & strSagyobiMonth
+
+
+    intSheetCnt = ThisWorkbook.Sheets.Count
+
+    
+    
+    
+     For i = 1 To intSheetCnt
+        strShutokuSheetName = Sheets(i).Name
+        If strSakuseiSheetName = strShutokuSheetName Then
+            b = True
+            Exit For
+        End If
+    Next i
+    
+    
+    
+    If b = False Then
+        Worksheets.Add after:=Worksheets(Worksheets.Count)
+        ActiveSheet.Name = strSakuseiSheetName
+    End If
+    
+    
+    
+    
+    
+    
+    
+
+    
+    Sheets("入力").Select
+    Range("B4:D5").Select
+    Selection.Copy
+
+    Worksheets(strSakuseiSheetName).Activate
+    Worksheets(strSakuseiSheetName).Range("C5").Select
+    ActiveSheet.Paste
+    Sheets("入力").Select
+    Range("B9:J10").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets(strSakuseiSheetName).Select
+    Worksheets(strSakuseiSheetName).Range("F5").Select
+    ActiveSheet.Paste
+    Worksheets(strSakuseiSheetName).Range("B5:B6").Select
+    Application.CutCopyMode = False
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = True
+    End With
+    With Selection.Font
+        .Name = "ＭＳ Ｐゴシック"
+        .FontStyle = "太字"
+        .Size = 11
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ThemeColor = xlThemeColorLight1
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+    Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+    With Selection.Borders(xlEdgeLeft)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeTop)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeBottom)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeRight)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    Selection.Borders(xlInsideVertical).LineStyle = xlNone
+    Selection.Borders(xlInsideHorizontal).LineStyle = xlNone
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 16777062
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    ActiveCell.FormulaR1C1 = "No"
+    Worksheets(strSakuseiSheetName).Columns("B:N").Select
+    Worksheets(strSakuseiSheetName).Columns("B:N").EntireColumn.AutoFit
+'    Worksheets(strSakuseiSheetName).Range("A1").Select
+        
+'入力内容コピー
+    Sheets("入力").Select
+    Range("B6:D6").Select
+    Selection.Copy
+    Sheets(strSakuseiSheetName).Select
+    Worksheets(strSakuseiSheetName).Range("C7").Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+    Selection.Copy
+    Worksheets(strSakuseiSheetName).Range("C7:E62").Select
+    ActiveSheet.Paste
+
+    Sheets("入力").Select
+    Range("B11:J66").Select
+    ActiveWindow.SmallScroll Down:=-24
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets(strSakuseiSheetName).Select
+    Worksheets(strSakuseiSheetName).Range("F7").Select
+    ActiveSheet.Paste
+    Worksheets(strSakuseiSheetName).Columns("B:N").Select
+    Worksheets(strSakuseiSheetName).Columns("B:N").EntireColumn.AutoFit
+    
+    
+    Sheets("入力").Select
+    Worksheets("入力").Range("A11:A66").Select
+    Selection.Copy
+    Sheets(strSakuseiSheetName).Select
+    Sheets(strSakuseiSheetName).Range("B7").Select
+    ActiveWindow.SmallScroll Down:=-24
+    ActiveSheet.Paste
+    With Selection.Font
+        .ThemeColor = xlThemeColorLight1
+        .TintAndShade = 0
+    End With
+    
+    
+    Sheets(strSakuseiSheetName).Range("B7:B62").Select
+    Application.CutCopyMode = False
+    Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+    Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+    With Selection.Borders(xlEdgeLeft)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeTop)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeBottom)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeRight)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideVertical)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideHorizontal)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    
+    
+    
+    Worksheets(strSakuseiSheetName).Range("C4").Value = strSagyobiMonth
+    Worksheets(strSakuseiSheetName).Range("C4").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 65535
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    
+    Worksheets(strSakuseiSheetName).Range("A1").Select
+    
+    Exit Sub
+    
+    
+End Sub
